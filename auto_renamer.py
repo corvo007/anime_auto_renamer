@@ -1,5 +1,6 @@
 import json
 import re
+import time
 import requests
 import os
 import hashlib
@@ -145,7 +146,9 @@ def handle_file(path: str, mode: int, dry_run=False):
         for file in file_infos:
             src = list(file.keys())[0]
             dst = list(file.values())[0]
-            print(src, "will be renamed (and move) as", dst)
+            print(
+                f"\033[0;36m {src} \033[0m will be renamed (and move) as \033[0;36m {dst} \033[0m"
+            )
             if not dst.parent.exists():
                 dst.parent.mkdir(parents=True)
             shutil.move(src, dst)
@@ -168,3 +171,4 @@ if __name__ == "__main__":
             ),
         )
     print("done")
+    time.sleep(120)
